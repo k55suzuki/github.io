@@ -4,75 +4,86 @@ using System.Linq;
 using System.Text;
 
 namespace practice
-{ 
-
-    class MainClass
+{
+    class Program
     {
-        public static void drawChessboard()
+        private static bool UTF8Encoding(string v)
         {
-            int[,] board = new int[10, 17];
-            int Width = 17;
-            int Height = 10;
-            board[4, 4] = 1;
-            board[4, 5] = -1;
-            board[5, 4] = -1;
-            board[5, 4] = 1;
+            throw new NotImplementedException();
+        }
 
-            for (int y = 0; i < Height; i++)
-            {    
-                    Console.Write("+---------------+");         
-                    for (int j = 0; j < Width; j++)
+        public static void DrawGameboard(int[,]board)
+        {
+            string stringUTF8 = someFunctionReturnsUtf8();
+            byte[] bytesUTF8 = System.Text.Encoding.Default.GetBytes(stringUTF8);
+            string stringSJIS = System.Text.Encoding.UTF8.GetString(bytesUTF8);
+
+            Console.Clear();
+            Console.WriteLine("ＡＢＣＤＥＦＧＨ");
+            for (int y = 0; y < 8; y++)
+            {
+                for (int x = 0; x < 8; x++)
+                {
+                    //if (x == 0 + y)
+                    //{
+                    //    Console.Write();
+                    //}
+                    if (board[x, y] == 0)
                     {
-                        if (j % 2 == 0)
-                        {
-                            Console.Write("|");
-                        }
-                        else if (board[i, j] == 0)
-                        {
-                            Console.Write(".");
-                        }
-                        else if (board[i, j] == 1)
-                        {
-                            Console.Write("●");
-                        }
-                        else
-                        {
-                            Console.Write("◯");
-                        }
-                    }            
+                        Console.Write("・");
+                    }
+                    else if (board[x, y] == 1)
+                    {
+                        Console.Write("●");
+                    }
+                    else
+                    {
+                        Console.Write("◯");
+                    }
+                }
                 Console.WriteLine();
             }
         }
 
-        public static void Main(string[] args)
+        private static string someFunctionReturnsUtf8()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void Reversi(string[] args)
         {
             Console.WriteLine("Game start");
-
-            //０１２３４５６７８ Width9 Height9
-            //２・・・・・・・・
-            //３・・・・・・・・
-            //４・・・〇仝・・・
-            //５・・・仝〇・・・
-            //６・・・・・・・・
-            //７・・・・・・・・
-            //８・・・・・・・・
-
-            //+---------------+ Width17 Height10
-            //|.|.|.|.|.|.|.|.|
-            //|.|.|.|.|.|.|.|.|
-            //|.|.|.|.|.|.|.|.|
-            //|.|.|.|●|◯|.|.|.|
-            //|.|.|.|◯|●|.|.|.|
-            //|.|.|.|.|.|.|.|.|
-            //|.|.|.|.|.|.|.|.|
-            //|.|.|.|.|.|.|.|.|
-            //+---------------+
+            //　１２３４５６７８
+            //Ａ・・・・・・・・
+            //Ｂ・・・・・・・・
+            //Ｃ・・・・・・・・
+            //Ｄ・・・❍●・・・
+            //Ｅ・・・●❍・・・
+            //Ｆ・・・・・・・・
+            //Ｇ・・・・・・・・
+            //Ｈ・・・・・・・・
 
             //初期盤面の描写
-            drawChessboard();
-            
+            int[,] board = new int[9, 9];
+            board[4, 4] = 1;
+            board[4, 5] = -1;
+            board[5, 4] = -1;
+            board[5, 4] = 1;
+            int width = board.GetLength(0);
+            int height = board.GetLength(1);
+            DrawGameboard(board);
+
             //ゲーム開始
             Console.WriteLine("Enter your placement");
         }
     }
 }
+
+//stringUTF8に何らかUTF8の文字列が入ってくる
+//string stringUTF8 = someFunctionReturnsUtf8();
+
+//まずはバイト配列に変換する
+//byte[] bytesUTF8 = System.Text.Encoding.Default.GetBytes(stringUTF8);
+
+//バイト配列をUTF8の文字コードとしてStringに変換する
+//string stringSJIS = System.Text.Encoding.UTF8.GetString(bytesUTF8);
